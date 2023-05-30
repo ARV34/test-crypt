@@ -201,7 +201,7 @@ void UI_PrintHelp(void)
 {
 	printf("Help... \n");
 	printf("Data encryption: \n");
-	printf("\tset <len key 128|192|256> <login 4-20 (0-9, a-z, A-Z, _)> <password 8-40> \n");
+	printf("\tset <len key 128|192|256> <login 4-20 (0-9, a-z, A-Z, _)> <password 8-50> \n");
 	printf("Data decryption: \n");
 	printf("\tget <len key 128|192|256> <login hex 4-20> <password hex 8-50> \n");
 }
