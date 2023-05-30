@@ -14,6 +14,8 @@
 static const char* file_name = "data.bin";
 
 typedef struct {
+	int login_len;
+	int password_len;
 	uint8_t key_random_crypt[32];
 	uint8_t login_crypt[SIZE_BUFF];
 	uint8_t password_crypt[SIZE_BUFF];
@@ -29,6 +31,8 @@ crypt_status_t FileWriteRun(crypt_info_t* data)
     Crypt_EncryptFixedKey(key_random_temp, data->len_key / 8, data_file.key_random_crypt);
     Crypt_Encrypt(data->login, login_len, key_random_temp, data->len_key, data_file.login_crypt);
     Crypt_Encrypt(data->password, password_len, key_random_temp, data->len_key, data_file.password_crypt);
+    data_file.login_len = login_len;
+    data_file.password_len = password_len;
 
     //Encryption check
     uint8_t login_temp[SIZE_BUFF] = {0};
@@ -73,7 +77,9 @@ crypt_status_t FileReadRun(crypt_info_t* data)
     {
         if(
             (memcmp(data_file.login_crypt, data->login_crypt, login_len) == 0) &&
-            (memcmp(data_file.password_crypt, data->password_crypt, password_len) == 0)
+            (memcmp(data_file.password_crypt, data->password_crypt, password_len) == 0) &&
+            (data_file.login_len == login_len) &&
+            (data_file.password_len == password_len)
         ) {
             Crypt_DecryptFixedKey(data_file.key_random_crypt, data->len_key / 8, key_random_temp);
             Crypt_Decrypt(data_file.login_crypt, login_len, key_random_temp, data->len_key, data->login);
