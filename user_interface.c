@@ -16,45 +16,39 @@ enum {
 	UI_POS_PASSWORD
 };
 
-static int CheckHex(const char hex)
-{
-	if(
-		(hex < 0x30 || hex > 0x39) &&
-		(hex < 0x41 || hex > 0x46) &&
-		(hex < 0x61 || hex > 0x66) 
-	) return 1;
-	return 0;
-}
-
 static int HexToString(const char *in, uint8_t *out)
 {
+//0-9, A-F, a-f
+#define CHECK_HEX(hex) (              \
+	((hex) < 0x30 || (hex) > 0x39) && \
+	((hex) < 0x41 || (hex) > 0x46) && \
+	((hex) < 0x61 || (hex) > 0x66))
+
 	int num = strlen(in);
-	if((num % 2) != 0){
+	if((num % 2) != 0)
 		return 1;
-	}
+
 	num /= 2;
-    for (int i = 0; i < num; i++) {
-		if(CheckHex(in[i * 2]) || CheckHex(in[(i * 2) + 1]))
+	for (int i = 0; i < num; i++) {
+		if(CHECK_HEX(in[i * 2]) || CHECK_HEX(in[(i * 2) + 1]))
 			return 1;
 		if(sscanf(in + i * 2, "%2x", (int*)&out[i]) == 0)
 			return 1;
-    }
+	}
 	out[num] = '\0';
 	return 0;
 }
 
 static void PrintStringHex(const uint8_t* str, int len_str)
 {
-    for (int i = 0; i < len_str; i++) {
-        printf("%02x", str[i]);
-    }
+	for (int i = 0; i < len_str; i++)
+		printf("%02x", str[i]);
 }
 
 static void PrintString(const uint8_t* str, int len_str)
 {
-    for (int i = 0; i < len_str; i++) {
-        printf("%c", str[i]);
-    }
+	for (int i = 0; i < len_str; i++)
+		printf("%c", str[i]);
 }
 
 static int CheckParameLen(int len, int max, int min)
@@ -65,15 +59,15 @@ static int CheckParameLen(int len, int max, int min)
 
 static int CheckLogin(const char* login, int len)
 {
-    for (int i = 0; i < len; i++) {
+	for (int i = 0; i < len; i++) {
 		if(
-			(login[i] < 0x30 || login[i] > 0x39) &&
-			(login[i] < 0x41 || login[i] > 0x5A) &&
-			(login[i] < 0x61 || login[i] > 0x7A) &&
-			login[i] != 0x5F
+			(login[i] < 0x30 || login[i] > 0x39) && //0-9
+			(login[i] < 0x41 || login[i] > 0x5A) && //A-Z
+			(login[i] < 0x61 || login[i] > 0x7A) && //a-z
+			login[i] != 0x5F                        //_
 		) 
 			return 1;
-    }
+	}
 	return 0;
 }
 
@@ -161,6 +155,7 @@ void UI_PrintDecryptionData(crypt_info_t* data)
 	PrintString(data->password, strlen((char*)data->password));
 	printf("\n");
 }
+
 void UI_PrintMessage(crypt_status_t status)
 {
 	switch(status) 
@@ -200,8 +195,10 @@ void UI_PrintMessage(crypt_status_t status)
 void UI_PrintHelp(void)
 {
 	printf("Help... \n");
+	printf("Show help: \n");
+	printf("\t./crypt help \n");
 	printf("Data encryption: \n");
-	printf("\tset <len key 128|192|256> <login 4-20 (0-9, a-z, A-Z, _)> <password 8-50> \n");
+	printf("\t./crypt set <len key 128|192|256> <login 4-20 (0-9, a-z, A-Z, _)> <password 8-50> \n");
 	printf("Data decryption: \n");
-	printf("\tget <len key 128|192|256> <login hex 4-20> <password hex 8-50> \n");
+	printf("\t./crypt get <len key 128|192|256> <login hex 4-20> <password hex 8-50> \n");
 }
