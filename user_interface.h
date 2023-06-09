@@ -9,17 +9,17 @@
 
 #include <stdint.h>
 
-#define MAX_NUM_PARAM     5
-#define MIN_NUM_PARAM     2
+#define MAX_NUM_PARAM    5
+#define MIN_NUM_PARAM    2
 
 #define MAX_LEN_PASSWORD 50
 #define MIN_LEN_PASSWORD 8
 #define MAX_LEN_LOGIN    20
 #define MIN_LEN_LOGIN    4
 
-typedef enum { 
+typedef enum {
 	UI_CMD_HELP,
-	UI_CMD_SET,        
+	UI_CMD_SET,
 	UI_CMD_GET
 } crypt_cmd_t;
 
@@ -35,16 +35,17 @@ typedef enum {
 	ERROR_ENCRYPTION
 } crypt_status_t;
 
-#define SIZE_BUFF 100
+#define SIZE_BUFF_LOGIN    (MAX_LEN_LOGIN * 2)
+#define SIZE_BUFF_PASSWORD (MAX_LEN_PASSWORD * 2)
 
 typedef struct
 {
 	int len_key;  
 	crypt_cmd_t cmd;
-	uint8_t login[SIZE_BUFF];
-	uint8_t login_crypt[SIZE_BUFF];
-	uint8_t password[SIZE_BUFF];
-	uint8_t password_crypt[SIZE_BUFF];
+	uint8_t login[SIZE_BUFF_LOGIN];
+	uint8_t login_crypt[SIZE_BUFF_LOGIN];
+	uint8_t password[SIZE_BUFF_PASSWORD];
+	uint8_t password_crypt[SIZE_BUFF_PASSWORD];
 } crypt_info_t;
 
 int UI_ParsingCommand(crypt_info_t* data, char *arr_cmd[]);
