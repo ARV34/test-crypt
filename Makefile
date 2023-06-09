@@ -1,7 +1,7 @@
-# A1restov Roman <arv34@mail.ru>
+# Arestov Roman <arv34@mail.ru>
 
 CC = gcc
-CFLAGS += -c -Wall
+CFLAGS += -c -Wall -O2
 LFLAGS += -lcrypto -lssl
 
 all: crypt
