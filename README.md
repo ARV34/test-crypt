@@ -18,11 +18,11 @@ make clean
 ```console
 ./crypt help
 ```
-Зашифровать логин/пароль
+Зашифровать логин и пароль
 ```console
 ./crypt set <len key 128|192|256> <login 4-20 (0-9, a-z, A-Z, _)> <password 8-50>
 ```
-Расшифровка логина/пароля
+Расшифровка логина и пароля
 ```console
 ./crypt get <len key 128|192|256> <login hex 4-20> <password hex 8-50>
 ```
