@@ -5,24 +5,24 @@
 =========================================================
 Команда для сборки проекта
 ```console
-$ make
+make
 ```
 Команда для очистки проекта
 ```console
-$ make clean
+make clean
 ```
 
 Использование
 =========================================================
 Вывести справку 
 ```console
-$ ./crypt help
+./crypt help
 ```
 Зашифровать логин/пароль
 ```console
-$ ./crypt set <len key 128|192|256> <login 4-20 (0-9, a-z, A-Z, _)> <password 8-50>
+./crypt set <len key 128|192|256> <login 4-20 (0-9, a-z, A-Z, _)> <password 8-50>
 ```
 Расшифровка логина/пароля
 ```console
-$ ./crypt get <len key 128|192|256> <login hex 4-20> <password hex 8-50>
+./crypt get <len key 128|192|256> <login hex 4-20> <password hex 8-50>
 ```
