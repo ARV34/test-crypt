@@ -1,31 +1,28 @@
-Encryptor-decryptor of login and password
-=========================================================
+# Encryptor-decryptor of login and password
 Test project. The utility encrypts-decrypts the entered login and password. 
 The encryption result is saved to a binary file. 
 AES encryption algorithm, the key is generated randomly.
 
-Project build
-=========================================================
+## Project build
 Project build command
-```console
+```sh
 make
 ```
 Project cleanup command
-```console
+```sh
 make clean
 ```
 
-Usage
-=========================================================
+## Usage
 Show help
-```console
+```sh
 ./crypt help
 ```
 Encrypt username and password
-```console
+```sh
 ./crypt set <len key 128|192|256> <login 4-20 (0-9, a-z, A-Z, _)> <password 8-50>
 ```
 Login and password decryption
-```console
+```sh
 ./crypt get <len key 128|192|256> <login hex 4-20> <password hex 8-50>
 ```
