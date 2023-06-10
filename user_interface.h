@@ -38,8 +38,7 @@ typedef enum {
 #define SIZE_BUFF_LOGIN    (MAX_LEN_LOGIN * 2)
 #define SIZE_BUFF_PASSWORD (MAX_LEN_PASSWORD * 2)
 
-typedef struct
-{
+typedef struct {
 	int len_key;  
 	crypt_cmd_t cmd;
 	uint8_t login[SIZE_BUFF_LOGIN];
