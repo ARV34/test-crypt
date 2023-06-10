@@ -5,24 +5,24 @@ AES encryption algorithm, the key is generated randomly.
 
 ## Project build
 Project build command
-```sh
+```console
 make
 ```
 Project cleanup command
-```sh
+```console
 make clean
 ```
 
 ## Usage
 Show help
-```sh
+```console
 ./crypt help
 ```
 Encrypt username and password
-```sh
+```console
 ./crypt set <len key 128|192|256> <login 4-20 (0-9, a-z, A-Z, _)> <password 8-50>
 ```
 Login and password decryption
-```sh
+```console
 ./crypt get <len key 128|192|256> <login hex 4-20> <password hex 8-50>
 ```
